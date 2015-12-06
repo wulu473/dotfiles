@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/Users/wulu/code/agentk/website/UserFrosting/userfrosting/templates/themes/default/account'
+let g:netrw_dirhist_2='/Users/wulu/bin'
+let g:netrw_dirhist_3='/Users/wulu/code/agentk/website/oauth/public_test'
+let g:netrw_dirhist_4='/Users/wulu/code/agentk/website/UserFrosting/userfrosting/controllers'
+let g:netrw_dirhist_5='/Users/wulu/code/agentk/website/UserFrosting/userfrosting/vendor/oAuth2'
+let g:netrw_dirhist_6='/Users/wulu/code/agentk/website/UserFrosting/userfrosting/controllers'
