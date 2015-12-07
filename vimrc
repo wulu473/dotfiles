@@ -9,3 +9,5 @@ set ls=2
 
 hi SpellBad ctermfg=244
 
+:command! -nargs=+ Calc :py print <args>
+:py from math import 
