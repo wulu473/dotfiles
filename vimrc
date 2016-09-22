@@ -3,12 +3,12 @@ set number
 filetype on
 
 set smartindent
-set tabstop=3
+set tabstop=8
 
 set expandtab
 set smarttab
 
-set shiftwidth=3
+set shiftwidth=2
 set modeline
 set ls=2
 
@@ -24,4 +24,6 @@ hi SpellBad ctermfg=244
 
 " Using '#' as a comment in .dat files
 :let g:csv_comment = '#'
+hi CSVColumnEven term=bold ctermbg=4 guibg=DarkBlue
+hi CSVColumnOdd term=bold ctermbg=5 guibg=DarkMagenta
 
