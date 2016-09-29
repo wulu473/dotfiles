@@ -1,0 +1,23 @@
+host home
+  hostname home.wulu.at
+  user wulu
+
+host darwin
+  hostname login.hpc.cam.ac.uk
+  user lw473   
+
+host srcf
+  hostname srcf.net
+  user lw473
+
+host nikola-ext
+  ProxyCommand ssh -q srcf nc -q0 nikola.lsc.phy.private.cam.ac.uk 22	
+  user lw473
+
+host nikola
+  hostname nikola.lsc.phy.private.cam.ac.uk
+  user lw473
+
+host hex
+  hostname hex.lsc.phy.private.cam.ac.uk
+  user lw473
