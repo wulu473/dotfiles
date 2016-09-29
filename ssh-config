@@ -10,8 +10,16 @@ host srcf
   hostname srcf.net
   user lw473
 
-host nikola-ext
+host pwf
+  hostname linux.ds.cam.ac.uk
+  user lw473
+
+host nikola-srcf
   ProxyCommand ssh -q srcf nc -q0 nikola.lsc.phy.private.cam.ac.uk 22	
+  user lw473
+
+host nikola-pwf
+  ProxyCommand ssh -q pwf nc -q0 nikola.lsc.phy.private.cam.ac.uk 22	
   user lw473
 
 host nikola
@@ -21,3 +29,4 @@ host nikola
 host hex
   hostname hex.lsc.phy.private.cam.ac.uk
   user lw473
+
