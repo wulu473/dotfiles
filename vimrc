@@ -16,6 +16,8 @@ set clipboard=unnamedplus
 
 hi SpellBad ctermfg=244
 
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+
 :command! -nargs=+ Calc :py print <args>
 :py from math import *
 
