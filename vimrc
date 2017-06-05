@@ -14,6 +14,9 @@ set ls=2
 
 set clipboard=unnamedplus
 
+set foldmethod=syntax
+set foldclose=all
+
 hi SpellBad ctermfg=244
 
 autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0

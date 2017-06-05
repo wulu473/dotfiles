@@ -1,1 +1,8 @@
-.netrwhist
+# Xmonad
+xmonad/xmonad-x86_64-linux
+xmonad/xmonad.hi
+xmonad/xmonad.o
+
+# vim
+vim/.netrwhist
+
