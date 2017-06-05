@@ -7,4 +7,5 @@ packages = [
 ignore = [
   '.git',
   '.gitignore',
-  '*.swp' ]
+  '*.swp',
+  'README*' ]
