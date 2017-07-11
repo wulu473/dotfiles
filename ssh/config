@@ -7,7 +7,7 @@ host darwin
   user lw473   
 
 host srcf
-  hostname srcf.net
+  hostname shell.srcf.net
   user lw473
 
 host pwf
