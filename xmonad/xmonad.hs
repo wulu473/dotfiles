@@ -28,6 +28,7 @@ myKeys conf@(XConfig {XMonad.modMask = mod}) = M.fromList
     -- 0 here means no mod key
   , ((mod .|. shiftMask, xK_l), spawn "gnome-screensaver-command -l")
   , ((mod .|. shiftMask, xK_v), spawn "visit")
+  , ((mod .|. shiftMask, xK_s), spawn "visit-2.10.2")
   , ((mod .|. shiftMask, xK_i), spawn "VirtualBox")
   , ((mod .|. shiftMask, xK_m), spawn "mathematica")
   ,((0, xK_F10), spawn "amixer set Master toggle")
