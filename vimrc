@@ -1,3 +1,6 @@
+" Package manager
+execute pathogen#infect()
+
 syntax on
 set number
 filetype on
@@ -47,4 +50,7 @@ filetype indent on
 " " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
+
+" Check python syntax on open
+let g:syntastic_check_on_open = 1
 
