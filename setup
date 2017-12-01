@@ -1,0 +1,10 @@
+#!/bin/bash
+
+pip install dotfiles --user
+
+# setup dotfilesrc symlink
+dotfiles=$(cd "$(dirname "$0")" && pwd)
+ln -s $dotfiles/dotfilesrc $HOME/.dotfilesrc
+
+dotfiles --sync
+
