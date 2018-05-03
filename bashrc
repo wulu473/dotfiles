@@ -11,6 +11,7 @@ fi
 
 # Setup crossplatform definitions
 
+export USR_OPT=$HOME/opt
 
 # Source platform specific definitions
 if [[ $platform == 'linux' ]]; then
