@@ -51,6 +51,3 @@ filetype indent on
 " " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 
-" Check python syntax on open
-let g:syntastic_check_on_open = 1
-

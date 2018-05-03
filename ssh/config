@@ -3,8 +3,12 @@ host home
   user wulu
 
 host darwin
-  hostname login.hpc.cam.ac.uk
+  hostname login-sand8.hpc.cam.ac.uk
   user lw473   
+
+host csd3
+  hostname login-cpu.hpc.cam.ac.uk
+  user lw473
 
 host srcf
   hostname shell.srcf.net
