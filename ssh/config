@@ -7,7 +7,7 @@ host darwin
   user lw473   
 
 host csd3
-  hostname login-e-15.hpc.cam.ac.uk
+  hostname login-cpu.hpc.cam.ac.uk
   user lw473
 
 host srcf
