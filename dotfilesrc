@@ -2,7 +2,8 @@
 repository = ~/dotfiles
 
 packages = [
-  'ssh']
+  'ssh',
+  'xmonad']
 
 ignore = [
   '.git',
