@@ -4,7 +4,7 @@ pip install dotfiles --user
 
 # setup dotfilesrc symlink
 dotfilesrcpath=$(cd "$(dirname "$0")" && pwd)
-ln -s $dotfilesrcpath/dotfilesrc $HOME/.dotfilesrc
+ln -f -s $dotfilesrcpath/dotfilesrc $HOME/.dotfilesrc
 
-dotfiles --sync
+$HOME/.local/bin/dotfiles --sync
 
