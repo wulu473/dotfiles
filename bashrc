@@ -16,6 +16,8 @@ export USR_OPT=$HOME/opt
 # Use Cambridge colour palette for gnuplot
 export GNUPLOT_LIB=$HOME/.gnuplot-files/cambridge.pal
 
+export PATH=$PATH:$HOME/bin:$HOME/.local/bin
+
 # Source platform specific definitions
 if [[ $platform == 'linux' ]]; then
   source $HOME/.bashrc-linux
