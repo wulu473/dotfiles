@@ -30,3 +30,6 @@ then
   source $HOME/.bashrc-local
 fi
 
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/spack/bin:$PATH
+export PATH=/anaconda3/bin:$PATH
