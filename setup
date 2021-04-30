@@ -3,8 +3,25 @@
 pip install dotfiles --user
 
 # setup dotfilesrc symlink
-dotfilesrcpath=$(cd "$(dirname "$0")" && pwd)
-ln -f -s $dotfilesrcpath/dotfilesrc $HOME/.dotfilesrc
+dotfilesrepopath=$(cd "$(dirname "$0")" && pwd)
+ln -f -s $dotfilesrepopath/dotfilesrc $HOME/.dotfilesrc
+sed -i "s:repository\s*=.*:repository = $dotfilesrepopath:" $dotfilesrepopath/dotfilesrc
+
+# Check if we can move the current bashrc to local
+if [ -f "$HOME/.bashrc-local" ]; then
+	echo setup: cannot create file ‘$HOME/.bashrc-local’: File exists 1>&2
+	exit 1
+fi
+if [ -f "$HOME/.bashrc" ]; then
+	mv $HOME/.bashrc $HOME/.bashrc-local
+fi
+if [ -f "$HOME/.profile-local" ]; then
+	echo setup: cannot create file ‘$HOME/.profile-local’: File exists 1>&2
+	exit 1
+fi
+if [ -f "$HOME/.profile" ]; then
+	mv $HOME/.profile $HOME/.profile-local
+fi
 
 $HOME/.local/bin/dotfiles --sync
 
