@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Setup crossplatform definitions
+
+export USR_OPT=$HOME/opt
+
+
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 
