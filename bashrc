@@ -35,3 +35,4 @@ fi
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/bin:$PATH
 
+[ -f "/Users/wulu/.ghcup/env" ] && source "/Users/wulu/.ghcup/env" # ghcup-env
