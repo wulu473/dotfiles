@@ -9,8 +9,6 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='macos'
 fi
 
-# Setup crossplatform definitions
-
 
 # Source platform specific definitions
 if [[ $platform == 'linux' ]]; then
@@ -26,5 +24,9 @@ then
   source $HOME/.profile-local
 fi
 
-export PATH=$HOME/bin:$PATH
+# Source dotfiles 
+if [ -f $HOME/.rc ]
+then
+  source $HOME/.rc
+fi
 

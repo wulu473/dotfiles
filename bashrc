@@ -9,14 +9,14 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='macos'
 fi
 
-# Setup crossplatform definitions
-
-export USR_OPT=$HOME/opt
+# Source dotfiles 
+if [ -f $HOME/.rc ]
+then
+  source $HOME/.rc
+fi
 
 # Use Cambridge colour palette for gnuplot
 export GNUPLOT_LIB=$HOME/.gnuplot-files/cambridge.pal
-
-export PATH=$PATH:$HOME/bin:$HOME/.local/bin
 
 # Source platform specific definitions
 if [[ $platform == 'linux' ]]; then
@@ -32,7 +32,3 @@ then
   source $HOME/.bashrc-local
 fi
 
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/bin:$PATH
-
-[ -f "/Users/wulu/.ghcup/env" ] && source "/Users/wulu/.ghcup/env" # ghcup-env
