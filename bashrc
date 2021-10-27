@@ -33,5 +33,5 @@ then
 fi
 
 export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.local/spack/bin:$PATH
-export PATH=/anaconda3/bin:$PATH
+export PATH=$HOME/bin:$PATH
+

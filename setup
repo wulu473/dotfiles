@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pip install dotfiles --user
+pip3 install dotfiles --user
 
 # setup dotfilesrc symlink
 dotfilesrepopath=$(cd "$(dirname "$0")" && pwd)
@@ -23,5 +23,13 @@ if [ -f "$HOME/.profile" ]; then
 	mv $HOME/.profile $HOME/.profile-local
 fi
 
-$HOME/.local/bin/dotfiles --sync
+pip3 show dotfiles -f | grep "Location:"
+pip3 show dotfiles -f | grep "/bin/dotfiles$"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  $HOME/Library/Python/3.9/bin
+else
+  $HOME/.local/bin/dotfiles --sync
+fi
+
 
