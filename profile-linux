@@ -22,11 +22,12 @@ if [ -d "$HOME/bin" ] ; then
 fi
 PATH="/usr/games:$PATH"
 PATH="/usr/local/sbin:/usr/sbin:/sbin:$PATH"
+PATH="$HOME/.bin:$PATH"
 
 # Run setup scripts
 # Only on my computer and if not remotely
 if [ -z "$SSH_CONNECTION" ]; then
-  if [ $MY_COMPUTER = $HOSTNAME ]; then
+  if [ "$MY_COMPUTER" = "$HOSTNAME" ]; then
     # Remap keyboard
     setxkbmap us
     xmodmap -e "clear Lock"
