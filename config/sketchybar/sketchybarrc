@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# Detect system appearance. `defaults read` errors out in light mode, which
+# is the documented way macOS exposes the setting.
+if defaults read -g AppleInterfaceStyle 2>/dev/null | grep -q Dark; then
+    BAR_COLOR=0xff1d1f21
+    TEXT_COLOR=0xffffffff
+    ACTIVE_BG=0xff3a3d42
+else
+    BAR_COLOR=0xffe5e5e5
+    TEXT_COLOR=0xff1d1f21
+    ACTIVE_BG=0xffc8c8c8
+fi
+
+sketchybar --bar \
+    height=32 \
+    position=top \
+    sticky=off \
+    padding_left=10 \
+    padding_right=10 \
+    notch_width=200 \
+    color=$BAR_COLOR
+
+sketchybar --default \
+    icon.color=$TEXT_COLOR \
+    label.color=$TEXT_COLOR \
+    padding_left=5 \
+    padding_right=5
+
+##### Aerospace workspaces, split around the camera notch #####
+sketchybar --add event aerospace_workspace_change
+
+add_space() {
+    local sid="$1"
+    local side="$2"
+    sketchybar --add item "space.$sid" "$side" \
+               --set "space.$sid" \
+                    icon="$sid" \
+                    icon.padding_left=8 \
+                    icon.padding_right=4 \
+                    label.font="sketchybar-app-font:Regular:16.0" \
+                    label.padding_right=8 \
+                    background.color=$ACTIVE_BG \
+                    background.corner_radius=6 \
+                    background.height=22 \
+                    background.drawing=off \
+                    click_script="aerospace workspace $sid" \
+                    script="$CONFIG_DIR/plugins/aerospace.sh" \
+               --subscribe "space.$sid" aerospace_workspace_change front_app_switched
+}
+
+WORKSPACES=($(aerospace list-workspaces --all))
+TOTAL=${#WORKSPACES[@]}
+# Left side gets the extra workspace when the count is odd.
+LEFT_COUNT=$(( (TOTAL + 1) / 2 ))
+
+# Left half, in order.
+for ((i = 0; i < LEFT_COUNT; i++)); do
+    add_space "${WORKSPACES[$i]}" left
+done
+
+##### Right side. The `right` position inserts each new item to the LEFT  #####
+##### of existing ones, so add the rightmost-visible item (clock) first   #####
+##### and then add the workspaces in reverse to land in natural order.    #####
+
+# Clock — far right.
+sketchybar --add item clock right \
+           --set clock \
+                update_freq=10 \
+                script='sketchybar --set clock label="$(date "+%a %d %b  %H:%M")"'
+
+# Right-side workspaces.
+for ((i = TOTAL - 1; i >= LEFT_COUNT; i--)); do
+    add_space "${WORKSPACES[$i]}" right
+done
+
+##### Theme change listener (invisible) #####
+# Reload the whole bar when the system theme changes. The notification fires
+# slightly before `defaults` returns the new value, hence the short sleep.
+sketchybar --add event theme_change AppleInterfaceThemeChangedNotification \
+           --add item theme_listener right \
+           --set theme_listener drawing=off \
+                script='[ "$SENDER" = "theme_change" ] && sleep 0.2 && sketchybar --reload' \
+           --subscribe theme_listener theme_change
+
+sketchybar --update
