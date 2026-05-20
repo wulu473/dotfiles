@@ -1,20 +1,41 @@
-[user]
-	email = luwutsch@microsoft.com
-	name = Lukas Wutschitz
+# Identity is NOT set here. It comes from per-host include files:
+#   ~/.gitconfig-personal  (default for repos under ~/)
+#   ~/.gitconfig-work      (override for repos under ~/work/)
+# `setup` creates empty stubs for these on first run.
+
+[init]
+	defaultBranch = main
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
 [color]
 	ui = true
 	status = auto
 	branch = auto
-[core]
-	editor = vim
+[diff]
+	algorithm = histogram
+	colorMoved = zebra
+[merge]
+	conflictStyle = zdiff3
+[pull]
+	ff = only
+[push]
+	autoSetupRemote = true
+[rerere]
+	enabled = true
 [alias]
-        lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
-        lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-
+	lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+	lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 [credential]
-	helper = cache --timeout=2592000
+	helper = oauth
+
+# Per-directory identity. The more specific match wins (last one applied).
+[includeIf "gitdir:~/"]
+	path = ~/.gitconfig-personal
+[includeIf "gitdir:~/work/"]
+	path = ~/.gitconfig-work

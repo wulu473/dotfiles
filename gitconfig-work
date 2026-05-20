@@ -1,0 +1,5 @@
+# Work git identity. Symlinked to ~/.gitconfig-work.
+# Loaded by ~/.gitconfig (via includeIf) for repos under ~/work/.
+[user]
+	email = luwutsch@microsoft.com
+	name = Lukas Wutschitz

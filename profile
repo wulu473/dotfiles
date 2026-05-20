@@ -1,33 +1,22 @@
 #!/bin/bash
 
+# Login shell entry point.
+# Sourcing order: rc -> platform -> local. Local always wins.
+
 # Determine platform
 platform='unknown'
-unamestr=`uname`
-if [[ "$unamestr" == 'Linux' ]]; then
-  platform='linux'
-elif [[ "$unamestr" == 'Darwin' ]]; then
-  platform='macos'
+case "$(uname)" in
+  Linux)  platform='linux' ;;
+  Darwin) platform='macos' ;;
+esac
+
+# Cross-platform defaults
+[ -f "$HOME/.rc" ] && . "$HOME/.rc"
+
+# Platform-specific
+if [ "$platform" = 'macos' ] && [ -f "$HOME/.profile-macos" ]; then
+  . "$HOME/.profile-macos"
 fi
 
-
-# Source platform specific definitions
-if [[ $platform == 'linux' ]]; then
-  source $HOME/.profile-linux
-elif [[ $platform == 'macos' ]]; then
-  source $HOME/.profile-macos
-fi
-
-# Source profile local files 
-# This contains local definitions which are not stored in the repository
-if [ -f $HOME/.profile-local ]
-then
-  source $HOME/.profile-local
-fi
-
-# Source dotfiles 
-if [ -f $HOME/.rc ]
-then
-  source $HOME/.rc
-fi
-
-
+# Machine-specific (not tracked in dotfiles)
+[ -f "$HOME/.profile-local" ] && . "$HOME/.profile-local"

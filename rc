@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Setup crossplatform definitions
+# Cross-platform interactive-shell defaults.
+# Sourced by both bashrc and zshrc (and by profile for login shells).
 
-export USR_OPT=$HOME/opt
+export USR_OPT="$HOME/opt"
 
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/bin:$PATH
-
-[ -f "$HOME/.ghcup/env" ] && source "$HOME/.ghcup/env" # ghcup-env
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env

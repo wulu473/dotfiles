@@ -1,0 +1,22 @@
+# Global gitignore. Symlinked to ~/.gitignore_global.
+# Referenced from gitconfig as core.excludesfile.
+
+# OS noise
+.DS_Store
+
+# Editor noise
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Language noise
+__pycache__/
+*.py[cod]
+.Python
+node_modules/
+
+# Direnv / dotenv
+.env
+.envrc

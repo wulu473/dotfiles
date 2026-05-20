@@ -1,5 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Sourcing order: rc -> platform -> local. Local always wins.
+# Machine-specific lines (uv, Antigravity, etc.) belong in ~/.zshrc-local.
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
-ZSH_THEME="spaceship"
+ZSH_THEME="robbyrussell"
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 
 # Set list of themes to load
@@ -101,24 +101,18 @@ source $ZSH/oh-my-zsh.sh
 
 # Determine platform
 platform='unknown'
-unamestr=`uname`
-if [[ "$unamestr" == 'Linux' ]]; then
-  platform='linux'
-elif [[ "$unamestr" == 'Darwin' ]]; then
-  platform='macos'
+case "$(uname)" in
+  Linux)  platform='linux' ;;
+  Darwin) platform='macos' ;;
+esac
+
+# Cross-platform defaults
+[ -f "$HOME/.rc" ] && . "$HOME/.rc"
+
+# Platform-specific
+if [ "$platform" = 'macos' ] && [ -f "$HOME/.zshrc-macos" ]; then
+  . "$HOME/.zshrc-macos"
 fi
 
-# Source platform specific definitions
-if [[ $platform == 'linux' ]]; then
-  source $HOME/.zshrc-linux
-elif [[ $platform == 'macos' ]]; then
-  source $HOME/.zshrc-macos
-fi
-
-# Source bashrc local files 
-# This contains local definitions which are not stored in the repository
-if [ -f $HOME/.zshrc-local ]
-then
-  source $HOME/.zshrc-local
-fi
-
+# Machine-specific (not tracked in dotfiles)
+[ -f "$HOME/.zshrc-local" ] && . "$HOME/.zshrc-local"

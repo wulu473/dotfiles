@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# make ls show colours
+# macOS login-shell extras.
+
+# Make ls show colours
 export CLICOLOR=1
 
 export PDF_READER=open
-

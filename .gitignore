@@ -1,13 +1,10 @@
-# Xmonad
-xmonad/xmonad-x86_64-linux
-xmonad/xmonad.hi
-xmonad/xmonad.o
-xmonad/xmonad.errors
+# SSH keys (any private key under ssh/)
+ssh/id_*
+!ssh/id_*.pub.example
+ssh/known_hosts
+ssh/*.pem
 
-# vim
-vim/.netrwhist
-
-# SSH keys
-id_rsa
-id_rsa.pub
+# OS junk
+.DS_Store
+*.swp
 

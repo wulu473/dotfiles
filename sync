@@ -1,0 +1,138 @@
+#!/usr/bin/env python3
+"""Apply this dotfiles repo to $HOME.
+
+Idempotent. No prompts. Safe to run as often as you like.
+
+For every entry in the repo (minus IGNORE / PACKAGES below) the target is
+~/.<entry>. PACKAGES are dirs whose contents get linked into an existing
+$HOME directory instead of replacing the directory itself. EXTERNALS map
+arbitrary repo paths to arbitrary destinations outside $HOME.
+
+Conflict handling at every target:
+
+  - already a correct symlink   -> nothing.
+  - wrong symlink               -> replaced.
+  - missing                     -> created.
+  - real file/dir               -> moved to <target>-YYYY-MM-DD.bkp
+                                   (with .2.bkp, .3.bkp, ... if the
+                                   day's first slot is taken), then
+                                   symlinked.
+
+The "back up and link" behaviour means OS-introduced conflicts (e.g.
+macOS auto-creating a fresh ~/.zshrc skeleton) get handled automatically
+next time sync runs. There is no procedure to remember.
+"""
+
+from __future__ import annotations
+
+import datetime as dt
+import shutil
+import sys
+from dataclasses import dataclass
+from enum import Enum
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parent
+HOME = Path.home()
+
+# Entries in the repo that are NOT deployed.
+IGNORE = {
+    ".git",
+    ".gitignore",
+    "README.md",
+    "SUGGESTIONS.md",
+    "sync",
+    "vscode",  # handled via EXTERNALS on macOS.
+}
+
+# Entries whose CONTENTS get linked into an existing $HOME directory,
+# rather than the directory itself becoming a symlink. Maps the repo
+# subdirectory name to the target directory in $HOME.
+PACKAGES: dict[str, Path] = {
+    "ssh": HOME / ".ssh",  # only ssh/config; keys/known_hosts stay put.
+    "config": HOME / ".config",
+}
+
+# Files outside $HOME that we still want managed.
+EXTERNALS: dict[Path, Path] = {}
+if sys.platform == "darwin":
+    for _app in ("Code", "VSCodium"):
+        _user_dir = HOME / "Library/Application Support" / _app / "User"
+        if _user_dir.is_dir():
+            for _f in ("settings.json", "keybindings.json"):
+                EXTERNALS[REPO / "vscode" / _f] = _user_dir / _f
+
+
+class Action(Enum):
+    OK = "ok"
+    LINK = "link"
+    REPLACE = "replace"
+    BACKUP_LINK = "backup_link"
+
+
+@dataclass
+class Plan:
+    action: Action
+    src: Path
+    dst: Path
+
+
+def decide(src: Path, dst: Path) -> Plan:
+    if dst.is_symlink():
+        # readlink() returns the *literal* target. Compare to the absolute
+        # repo path so renaming the repo doesn't get flagged as "wrong".
+        return Plan(Action.OK if dst.readlink() == src else Action.REPLACE, src, dst)
+    if not dst.exists():
+        return Plan(Action.LINK, src, dst)
+    return Plan(Action.BACKUP_LINK, src, dst)
+
+
+def backup_path(dst: Path) -> Path:
+    """Pick an unused <dst>-YYYY-MM-DD[.N].bkp name."""
+    today = dt.date.today().isoformat()
+    candidate = dst.with_name(f"{dst.name}-{today}.bkp")
+    n = 2
+    while candidate.exists() or candidate.is_symlink():
+        candidate = dst.with_name(f"{dst.name}-{today}.{n}.bkp")
+        n += 1
+    return candidate
+
+
+def apply(plan: Plan) -> None:
+    src, dst = plan.src, plan.dst
+    if plan.action is Action.OK:
+        return
+    if plan.action is Action.BACKUP_LINK:
+        bkp = backup_path(dst)
+        shutil.move(str(dst), str(bkp))
+        print(f"sync: backed up {dst} -> {bkp}")
+    elif plan.action is Action.REPLACE:
+        dst.unlink()
+        print(f"sync: replaced stale symlink at {dst}")
+    # plan.action is Action.LINK: silent.
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    dst.symlink_to(src)
+
+
+def main() -> int:
+    # Top-level entries with default ~/.<name> targets.
+    for entry in sorted(p.name for p in REPO.iterdir()):
+        if entry in IGNORE or entry in PACKAGES:
+            continue
+        apply(decide(REPO / entry, HOME / f".{entry}"))
+
+    # Package-style: link contents into an existing $HOME directory.
+    for sub, target in PACKAGES.items():
+        target.mkdir(mode=0o700, exist_ok=True)
+        for child in (REPO / sub).iterdir():
+            apply(decide(child, target / child.name))
+
+    # Externals: arbitrary src -> dst pairs.
+    for src, dst in EXTERNALS.items():
+        apply(decide(src, dst))
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

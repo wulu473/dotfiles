@@ -1,4 +1,0 @@
-#!/bin/bash
-
-xrandr --output rdp0 --primary
-

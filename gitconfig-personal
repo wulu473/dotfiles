@@ -1,0 +1,5 @@
+# Personal git identity. Symlinked to ~/.gitconfig-personal.
+# Loaded by ~/.gitconfig (via includeIf) for repos under ~/.
+[user]
+	email = lukas@wulu.info
+	name = Lukas Wutschitz

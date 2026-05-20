@@ -1,0 +1,132 @@
+{
+    "remote.SSH.remotePlatform": {
+        "GCRAZGDL1229": "linux",
+        "GCR": "linux"
+    },
+    "python.languageServer": "Jedi",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.minimap.enabled": false,
+    "latex-workshop.view.pdf.viewer": "tab",
+    "team.showWelcomeMessage": false,
+    "julia.enableTelemetry": true,
+    "jupyter.askForKernelRestart": false,
+    "terminal.integrated.commandsToSkipShell": [
+        "language-julia.interrupt"
+    ],
+    "workbench.editorAssociations": {
+        "0": {
+            "viewType": "jupyter-notebook",
+            "filenamePattern": "*.ipynb"
+        }
+    },
+    "codespaces.accountProvider": "Microsoft",
+    "codespaces.planFilter": "/subscriptions/a0a92bea-0220-4755-a110-7d1b3f4fd24b/resourceGroups/IntelligenceInitiativesM365/providers/Microsoft.VSOnline/plans/vscs-plan-westeurope",
+    "ai.azureml.experimental: V2Config": true,
+    "explorer.confirmDragAndDrop": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.advanced.messages": {
+        "suppressGitMissingWarning": true
+    },
+    "python.showStartPage": false,
+    "C_Cpp.updateChannel": "Insiders",
+    "julia.enableCrashReporter": true,
+    "editor.tabSize": 3,
+    "editor.cursorStyle": "line",
+    "editor.insertSpaces": false,
+    "editor.lineNumbers": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#$%^&*|+=[]{}`?-",
+    "editor.wordWrap": "on",
+    "security.workspace.trust.untrustedFiles": "open",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false,
+        "yaml": true,
+        "python": true,
+        "latex": false
+    },
+    "julia.symbolCacheDownload": true,
+    "terminal.integrated.defaultProfile.windows": "Ubuntu-22.04 (WSL)",
+    "terminal.integrated.profiles.windows": {
+        "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe (migrated)": {
+            "path": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "args": []
+        }
+    },
+    "git.terminalAuthentication": false,
+    "notebook.lineNumbers": "on",
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": "off"
+    },
+    "editor.accessibilitySupport": "off",
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+    },
+    "latex-workshop.latex.autoBuild.run": "never",
+    "redhat.telemetry.enabled": false,
+    "git.openRepositoryInParentFolders": "never",
+    "workbench.startupEditor": "none",
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter-notebook",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "editor.inlineSuggest.enabled": true,
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "window.commandCenter": true,
+    "remote.autoForwardPortsSource": "hybrid",
+    "workbench.colorTheme": "Visual Studio Light",
+    "window.autoDetectColorScheme": true,
+    "workbench.preferredDarkColorTheme": "Visual Studio Dark",
+    "git.ignoreMissingGitWarning": true,
+    "azureML-Remote.useExecServer": false,
+    "@azure.argTenant": "",
+    "telemetry.telemetryLevel": "off",
+    "chat.agent.enabled": true,
+    "python.analysis.typeCheckingMode": "standard",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "remote.SSH.configFile": "~/OneDrive - Microsoft/ssh/config",
+    "workbench.preferredLightColorTheme": "Visual Studio Light",
+    "github.copilot.chat.codeGeneration.instructions": [],
+    "editor.renderWhitespace": "all",
+    "chat.tools.terminal.autoApprove": {
+        "/^az ml job (show|list|download|stream)\\b/": true,
+        "/^AZCOPY_AUTO_LOGIN_TYPE=AZCLI AZCOPY_TENANT_ID=\\S+ azcopy copy 'https:\\/\\/m365research2759033803\\.blob\\.core\\.windows\\.net\\/azureml\\/ExperimentRun\\/dcid\\.[^']+' \\/tmp\\/\\S+/": true,
+    },
+    "anyscalecompute.ray-distributed-debugger.initialized": true,
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "claudeCode.preferredLocation": "panel",
+    "chat.viewSessions.orientation": "stacked",
+    "chat.tools.urls.autoApprove": {
+        "https://api.truenas.com": true
+    },
+    "chat.mcp.gallery.enabled": true,
+    "terminal.integrated.inheritEnv": false,
+    "chat.hookFilesLocations": {
+        ".github/hooks": true,
+        ".claude/settings.local.json": true,
+        ".claude/settings.json": true,
+        "~/.copilot/hooks": true,
+        "~/.claude/settings.json": true,
+        "~/.agents/hooks": true
+    },
+    "http.systemCertificatesNode": true
+}
