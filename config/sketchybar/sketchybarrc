@@ -16,9 +16,11 @@ sketchybar --bar \
     height=32 \
     position=top \
     sticky=off \
+    topmost=window \
     padding_left=10 \
     padding_right=10 \
     notch_width=200 \
+    display=all \
     color=$BAR_COLOR
 
 sketchybar --default \
@@ -30,12 +32,25 @@ sketchybar --default \
 ##### Aerospace workspaces, split around the camera notch #####
 sketchybar --add event aerospace_workspace_change
 
+# Workspace display names. Unlisted IDs render as just the number.
+declare -A WORKSPACE_NAMES=(
+    [1]=messaging
+    [2]=planning
+    [3]=browser
+    [4]=assistant
+    [5]=editing
+    [9]=reading
+)
+
 add_space() {
     local sid="$1"
     local side="$2"
+    local name="${WORKSPACE_NAMES[$sid]}"
+    local icon="$sid"
+    [ -n "$name" ] && icon="$sid:$name"
     sketchybar --add item "space.$sid" "$side" \
                --set "space.$sid" \
-                    icon="$sid" \
+                    icon="$icon" \
                     icon.padding_left=8 \
                     icon.padding_right=4 \
                     label.font="sketchybar-app-font:Regular:16.0" \
@@ -84,3 +99,6 @@ sketchybar --add event theme_change AppleInterfaceThemeChangedNotification \
            --subscribe theme_listener theme_change
 
 sketchybar --update
+# Subscribed scripts don't run on reload — fire one event to seed each
+# workspace item's display mapping and focus highlight.
+sketchybar --trigger aerospace_workspace_change
