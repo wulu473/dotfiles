@@ -75,7 +75,11 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     inner.vertical =   0
     outer.left =       0
     outer.bottom =     0
-    outer.top =        0
+    # The macOS menu bar is auto-hidden, so nothing reserves top space.
+    # The built-in display's notch already pushes windows below the 32px
+    # sketchybar; every other monitor needs the bar's height reserved so
+    # windows don't tile underneath it.
+    outer.top =        [{ monitor.'built-in' = 0 }, 32]
     outer.right =      0
 
 # 'main' binding mode declaration
